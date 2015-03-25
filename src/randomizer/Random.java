@@ -38,10 +38,13 @@ public class Random{
         int parcial;
         int residuo = 0;
         for (int i = 0; i < 20; i++) {
-            parcial = (semilla * multiplicador) + cteAditiva;  
-            residuo = parcial % modulo;            
+            System.out.println(i+1);
+            parcial = (semilla * multiplicador) + cteAditiva;
+            System.out.println("parcial: " + parcial);
+            residuo = parcial % modulo; 
             res[i] = (double)residuo/modulo;
             semilla = residuo;
+            System.out.println("semilla: " + semilla);
         }    
         
         return res;
@@ -52,9 +55,11 @@ public class Random{
         int parcial;
         int residuo = 0;
         parcial = (semilla * multiplicador) + cteAditiva;  
-        residuo = parcial % modulo;            
+        System.out.println("parcialU: " + parcial);
+        residuo = parcial % modulo;     
         res = (double)residuo/modulo;
         semilla = residuo;
+         System.out.println("semillaU:" + semilla);
         return res;
      }    
         
@@ -67,6 +72,15 @@ public class Random{
         return aleatorio;
    
     }
+       
+        public double getAleatorioMultiUnitario() {
+        
+            int aux = cteAditiva;
+        cteAditiva = 0;
+        double aleatorio = this.getAleatorioMixtoUnitario();
+        cteAditiva = aux;
+        return aleatorio;
+     }    
     
         
     }
