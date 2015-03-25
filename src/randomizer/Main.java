@@ -18,7 +18,7 @@ public class Main {
         // TODO code application logic here
         
        
-        Random r = new Random(4,5,7,8);
+   /*     Random r = new Random(4,5,7,8);
      //Random r = new Random(15,8,16,100);
         
         double[] aleatorioMixto = r.getAleatorioMixto();
@@ -34,6 +34,14 @@ public class Main {
          System.out.println(" LOS NUMERO ALEATORIOS MULTI: "+aleatorioMulti[i]*10000);
        }
         */
+        TestChiCuadrado te = new TestChiCuadrado();
+        
+        int vec[] = te.intervalos(179,19);
+        System.out.println(""+te.toString());
+        for (int i = 0; i < vec.length; i++) {
+            System.out.println(""+vec[i]);
+        }
+        
         
     }
     

@@ -15,6 +15,8 @@ public class Random{
     private int multiplicador;
     private int cteAditiva;
     private int modulo;
+ 
+    
 
     public Random(int semilla, int multiplicador, int cteAditiva, int modulo) {
         this.semilla = semilla;
@@ -36,33 +38,43 @@ public class Random{
         int parcial;
         int residuo = 0;
         for (int i = 0; i < 20; i++) {
-            parcial = (semilla * multiplicador) + cteAditiva;
-            residuo = parcial % modulo;
+            parcial = (semilla * multiplicador) + cteAditiva;  
+            residuo = parcial % modulo;            
             res[i] = (double)residuo/modulo;
             semilla = residuo;
-        }
+        }    
+        
         return res;
     }
     
-    public float[] getAleatorioMultiplicativo()
+     public double getAleatorioMixtoUnitario() {
+        double res;
+        int parcial;
+        int residuo = 0;
+        parcial = (semilla * multiplicador) + cteAditiva;  
+        residuo = parcial % modulo;            
+        res = (double)residuo/modulo;
+        semilla = residuo;
+        return res;
+     }    
+        
+       public double[] getAleatorioMultiplicativo()
     {
-      /*  int aux = cteAditiva;
+        int aux = cteAditiva;
         cteAditiva = 0;
         double[] aleatorio = this.getAleatorioMixto();
         cteAditiva = aux;
-        return aleatorio;*/
-          float res[] = new float[20];
-        int parcial;
-        int residuo = 0;
-        for (int i = 0; i < 20; i++) {
-            parcial = (semilla * multiplicador);
-            residuo = parcial % modulo;
-            res[i] = (float)residuo/modulo;
-            semilla = residuo;
-        }
-        return res;
-     
+        return aleatorio;
+   
+    }
+    
         
     }
     
-}
+    
+    
+    
+   
+   
+    
+
