@@ -5,6 +5,9 @@
  */
 package randomizer;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Martin
@@ -16,8 +19,12 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
      */
     public InterfazChiCuadrado() {
         initComponents();
+        modelo.addColumn("Intervalos");
+        modelo.addColumn("fo");
+        modelo.addColumn("fe");
     }
-
+    TestChiCuadrado chi;
+    private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,6 +100,11 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         jLabel7.setText("Intervalos");
 
         jButtonGenerar.setText("Generar");
+        jButtonGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarActionPerformed(evt);
+            }
+        });
 
         jButtonGraficar.setText("Graficar");
 
@@ -211,6 +223,67 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
+        // TODO add your handling code here:
+        
+      
+            int cantNums = Integer.parseInt(jTextCantNums.getText());
+            int intervalos = Integer.parseInt(jTextCantInt.getText());
+            
+            chi = new TestChiCuadrado ();
+            Object[]fila = new Object[3];
+            
+            if(jRadioMath.isSelected())
+            {
+            
+            ArrayList valores = new ArrayList();
+            int[] vec = new int[intervalos];
+            
+            vec = chi.intervalos(cantNums, intervalos);
+                for (int i = 0; i < vec.length; i++) {
+                    
+                  
+                    Object value = (Object) vec[i];
+                    fila[0] = i+1;
+                    fila[1] = value;
+                    fila[2] = cantNums/intervalos;
+                    modelo.addRow(fila);
+                    
+                }
+            
+            jTableResult.setModel(modelo);
+            }
+            else if (jRadioMixto.isSelected())
+            {
+                
+                 
+            int semilla = Integer.parseInt(jTextSemilla.getText());
+            int multiplicador = Integer.parseInt(jTextMulti.getText());
+            int cteAditiva = Integer.parseInt(jTextCteAdt.getText());
+            int modulo = Integer.parseInt(jTextMod.getText()); 
+            ArrayList valores = new ArrayList();
+            int[] vec = new int[intervalos];
+            
+            vec = chi.intervalosCongruencialMixto(cantNums, intervalos, semilla, multiplicador, cteAditiva, modulo);
+            
+                for (int i = 0; i < vec.length; i++) {
+                    
+                    Object value = (Object) vec[i];
+                    fila[0] = i+1;
+                    fila[1] = value;
+                    fila[2] = cantNums/intervalos;
+                    modelo.addRow(fila);
+                    
+                }
+                
+                 jTableResult.setModel(modelo);
+                
+            }
+        
+        
+        
+    }//GEN-LAST:event_jButtonGenerarActionPerformed
 
     /**
      * @param args the command line arguments
