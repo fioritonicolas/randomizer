@@ -37,6 +37,25 @@ public class TestChiCuadrado
         return vector;
     }
     
+    public int[] intervalosCongruencialMixto(int cantidadNumeros, int cantIntervalos, int semilla, int multiplicador, int cteAditiva, int modulo)
+    {
+        //aplicar metodo congruencial
+        Random r = new Random (semilla, multiplicador,cteAditiva,modulo);
+        double[] aux = r.getAleatorioMixto(cantidadNumeros);
+        
+        float longIntervalo = (float)1/cantIntervalos;
+        int vector[] = new int[cantIntervalos];
+       
+        for (int i = 0; i < cantidadNumeros; i++) 
+        {
+            double num = aux[i];
+            float intervalo1 = (float) ((num/longIntervalo));
+            int intervalo = (int)Math.floor(intervalo1);
+            vector[intervalo] += 1;
+        }
+        return vector;
+    }
+    
     public String toString()
     {
         String aux = "";

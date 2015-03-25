@@ -33,18 +33,18 @@ public class Random{
     }
     
     
-    public double[] getAleatorioMixto() {
-        double res[] = new double[20];
+    public double[] getAleatorioMixto(int cantNums) {
+        double res[] = new double[cantNums];
         int parcial;
         int residuo = 0;
-        for (int i = 0; i < 20; i++) {
-            System.out.println(i+1);
+        for (int i = 0; i < cantNums; i++) {
+          //  System.out.println(i+1);
             parcial = (semilla * multiplicador) + cteAditiva;
-            System.out.println("parcial: " + parcial);
+          //  System.out.println("parcial: " + parcial);
             residuo = parcial % modulo; 
             res[i] = (double)residuo/modulo;
             semilla = residuo;
-            System.out.println("semilla: " + semilla);
+           // System.out.println("semilla: " + semilla);
         }    
         
         return res;
@@ -67,7 +67,7 @@ public class Random{
     {
         int aux = cteAditiva;
         cteAditiva = 0;
-        double[] aleatorio = this.getAleatorioMixto();
+        double[] aleatorio = this.getAleatorioMixto(20);
         cteAditiva = aux;
         return aleatorio;
    

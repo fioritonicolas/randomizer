@@ -250,7 +250,7 @@ private Random r;
         if (jRadioMixto.isSelected())
             
         {
-            aux = r.getAleatorioMixto();
+            aux = r.getAleatorioMixto(20);
            
             for (int i = 0; i < aux.length; i++) {
                 

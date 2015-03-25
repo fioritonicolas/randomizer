@@ -36,8 +36,9 @@ public class Main {
         */
         TestChiCuadrado te = new TestChiCuadrado();
         
-        int vec[] = te.intervalos(179,19);
-        System.out.println(""+te.toString());
+       int vec[] = te.intervalosCongruencialMixto(100, 5, 4, 5, 7, 8);
+       // int vec[] = te.intervalos(100, 5);
+        
         for (int i = 0; i < vec.length; i++) {
             System.out.println(""+vec[i]);
         }
