@@ -19,7 +19,8 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
-        
+        modelo.addColumn("n");
+        modelo.addColumn("RND");
         
         
     }
@@ -35,6 +36,7 @@ private Random r;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableResult = new javax.swing.JTable();
@@ -51,6 +53,7 @@ private Random r;
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButtonOtro = new javax.swing.JButton();
+        jButtonGenerar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,8 +99,15 @@ private Random r;
             }
         });
 
+        buttonGroup1.add(jRadioMulti);
         jRadioMulti.setText("Metodo Multiplicativo");
+        jRadioMulti.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioMultiStateChanged(evt);
+            }
+        });
 
+        buttonGroup1.add(jRadioMixto);
         jRadioMixto.setText("Metodo Mixto");
 
         jLabel1.setText("Semilla");
@@ -118,6 +128,13 @@ private Random r;
             }
         });
 
+        jButtonGenerar1.setText("Nuevo");
+        jButtonGenerar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,10 +150,10 @@ private Random r;
                                 .addGap(99, 99, 99)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(190, 190, 190)
+                                .addGap(136, 136, 136)
                                 .addComponent(jButtonGenerar)
-                                .addGap(59, 59, 59)
-                                .addComponent(jButtonOtro)))
+                                .addGap(53, 53, 53)
+                                .addComponent(jButtonOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,7 +178,8 @@ private Random r;
                                 .addComponent(jTextModulo))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel2)
-                                .addComponent(jRadioMixto))))
+                                .addComponent(jRadioMixto))
+                            .addComponent(jButtonGenerar1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(136, Short.MAX_VALUE)
                         .addComponent(jLabel3)
@@ -196,7 +214,8 @@ private Random r;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGenerar)
-                    .addComponent(jButtonOtro))
+                    .addComponent(jButtonOtro)
+                    .addComponent(jButtonGenerar1))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -224,8 +243,8 @@ private Random r;
             int modulo = Integer.parseInt(jTextModulo.getText());
             r = new Random (semilla,multiplicador,cteAditiva,modulo);
             double[]aux;
-            modelo.addColumn("n");
-            modelo.addColumn("RND");
+//            modelo.addColumn("n");
+//            modelo.addColumn("RND");
             Object [] fila = new Object[2];
         
         if (jRadioMixto.isSelected())
@@ -303,6 +322,18 @@ private Random r;
         
     }//GEN-LAST:event_jButtonOtroActionPerformed
 
+    private void jRadioMultiStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioMultiStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jRadioMultiStateChanged
+
+    private void jButtonGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerar1ActionPerformed
+        // TODO add your handling code here:
+        modelo =(DefaultTableModel) jTableResult.getModel();
+        modelo.setRowCount(0);
+        modelo.setColumnCount(0);
+    }//GEN-LAST:event_jButtonGenerar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,7 +370,9 @@ private Random r;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonGenerar;
+    private javax.swing.JButton jButtonGenerar1;
     private javax.swing.JButton jButtonOtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
