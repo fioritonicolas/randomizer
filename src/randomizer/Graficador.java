@@ -144,7 +144,7 @@ public class Graficador {
         grafica = ChartFactory.createHistogram("Histograma de Frecuencias",
                 "Intervalos", "Frecuencias", datosH,
                 PlotOrientation.VERTICAL, true, true, false);
-        IntervalMarker marker = new IntervalMarker(cantNums / intervalos, cantNums / intervalos);
+        IntervalMarker marker = new IntervalMarker((double)cantNums / intervalos, (double)cantNums / intervalos);
         marker.setLabel("Esperado");
         marker.setLabelAnchor(RectangleAnchor.BOTTOM);
         marker.setLabelTextAnchor(TextAnchor.BOTTOM_CENTER);

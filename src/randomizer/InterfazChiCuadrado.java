@@ -26,7 +26,7 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         modelo.addColumn("Hasta");
         modelo.addColumn("fo");
         modelo.addColumn("fe");
-        modelo.addColumn("((fe-fo)^2)/2");
+        modelo.addColumn("((fe-fo)^2)/fe");
         g = new Graficador();
         
     }
@@ -279,8 +279,8 @@ Graficador g;
             double amplitudNueva = round(amplitud,2);
             double inicioIntervalo = 0;
             double finalIntervalo = (round(inicioIntervalo,2) +  amplitudNueva);
-            float esperada;
-            float numerador;
+            double esperada;
+            double numerador;
             double acum = 0;
             
             if(jRadioMath.isSelected())
@@ -307,18 +307,18 @@ Graficador g;
                     Object value = (Object) vec[i];
                     fila[0] = i+1;
                     fila[3] = value;
-                    esperada = cantNums/intervalos;
+                    esperada = ((double)cantNums/(double)intervalos);
                     fila[4] = esperada;
                     numerador = (esperada-vec[i]);
-                    fila[5] = (Math.pow(numerador,2))/2;
-                    acum = acum + (Math.pow(numerador,2))/2;
+                    fila[5] = round((Math.pow(numerador,2))/esperada,4);
+                    acum = acum + (Math.pow(numerador,2))/esperada;
                     modelo.addRow(fila);
                     
                     
                 }
             Object[]totales = new Object[6];
             totales[0] = "TOTALES";
-            totales[5] = acum;
+            totales[5] = round(acum,4);
             modelo.addRow(totales);
             jTableResult.setModel(modelo);
             }
@@ -347,17 +347,18 @@ Graficador g;
                     Object value = (Object) vec[i];
                     fila[0] = i+1;
                     fila[3] = value;
-                    esperada = cantNums/intervalos;
+                    esperada = ((double)cantNums/(double)intervalos);
+   
                     fila[4] = esperada;
                     numerador = (esperada-vec[i]);
-                    fila[5] = (Math.pow(numerador,2))/2;
-                    acum = acum + (Math.pow(numerador,2))/2;
+                    fila[5] = round((Math.pow(numerador,2))/esperada,4);
+                    acum = acum + (Math.pow(numerador,2))/esperada;
                     modelo.addRow(fila);
                     
                 }
                 Object[]totales = new Object[6];
             totales[0] = "TOTALES";
-            totales[5] = acum;
+            totales[5] = round(acum,4);
             modelo.addRow(totales);
                  jTableResult.setModel(modelo);
                 

@@ -236,8 +236,11 @@ private Random r;
 
     private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
         // TODO add your handling code here:
+       
         
-            int semilla = Integer.parseInt(jTextSemilla.getText());
+        
+       
+        int semilla = Integer.parseInt(jTextSemilla.getText());
             int multiplicador = Integer.parseInt(jTextMultiplicador.getText());
             int cteAditiva = Integer.parseInt(jTextAditiva.getText());
             int modulo = Integer.parseInt(jTextModulo.getText());
@@ -262,6 +265,7 @@ private Random r;
             }
            
              jTableResult.setModel(modelo);
+              
           
         }
         
@@ -279,6 +283,7 @@ private Random r;
             }
            
              jTableResult.setModel(modelo);
+              
         }
         
         
