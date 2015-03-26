@@ -22,6 +22,7 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         modelo.addColumn("Intervalos");
         modelo.addColumn("fo");
         modelo.addColumn("fe");
+        g = new Graficador();
     }
     TestChiCuadrado chi;
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -107,6 +108,11 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         });
 
         jButtonGraficar.setText("Graficar");
+        jButtonGraficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGraficarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,13 +229,16 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    Graficador g;
     private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
         // TODO add your handling code here:
         
       
             int cantNums = Integer.parseInt(jTextCantNums.getText());
             int intervalos = Integer.parseInt(jTextCantInt.getText());
+            
+            g.setCantNums(cantNums);
+            g.setIntervalos(intervalos);
             
             chi = new TestChiCuadrado ();
             Object[]fila = new Object[3];
@@ -241,6 +250,8 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             int[] vec = new int[intervalos];
             
             vec = chi.intervalos(cantNums, intervalos);
+            g.setFrecuencias(vec);
+            g.cargarDatos();
                 for (int i = 0; i < vec.length; i++) {
                     
                   
@@ -266,7 +277,8 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             int[] vec = new int[intervalos];
             
             vec = chi.intervalosCongruencialMixto(cantNums, intervalos, semilla, multiplicador, cteAditiva, modulo);
-            
+            g.setFrecuencias(vec);
+            g.cargarDatos();
                 for (int i = 0; i < vec.length; i++) {
                     
                     Object value = (Object) vec[i];
@@ -284,6 +296,11 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonGenerarActionPerformed
+
+    private void jButtonGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraficarActionPerformed
+        // TODO add your handling code here:
+        g.levantarFrame();
+    }//GEN-LAST:event_jButtonGraficarActionPerformed
 
     /**
      * @param args the command line arguments

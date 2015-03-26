@@ -5,6 +5,9 @@
  */
 package randomizer;
 
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+
 /**
  *
  * @author Nico
@@ -14,10 +17,15 @@ public class FrameGraficos extends javax.swing.JFrame {
     /**
      * Creates new form FrameGraficos
      */
-    public FrameGraficos() {
+    
+    public FrameGraficos()
+    {
+       initComponents(); 
+    }
+    
+    public FrameGraficos(ChartPanel p) {
         initComponents();
-        g= new Graficador();
-        this.getContentPane().add(g.getPanel());
+        this.getContentPane().add(p);
         this.setSize(400, 600);
     }
     

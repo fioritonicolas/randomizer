@@ -16,7 +16,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.data.statistics.HistogramType;
 import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.Layer;
@@ -32,11 +35,14 @@ public class Graficador {
     private IntervalXYDataset datosH;
     private JFreeChart grafica;
     private ChartPanel panel;
+    private int cantNums;
+    private int intervalos;
+    private int[] frecuencias;
     
     public Graficador()
     {
        
-        datosH = createDataset();
+       
         
     
         
@@ -46,26 +52,7 @@ public class Graficador {
 //        PlotOrientation.VERTICAL, true, true, false);
         
         //ChartFactory.createHis
-        grafica = ChartFactory.createHistogram("Grafico de Frecuencias",
-        "Intervalos", "Frecuencias", datosH,
-        PlotOrientation.VERTICAL, true, true, false);
-        IntervalMarker marker = new IntervalMarker(20, 20);
-        marker.setLabel("Esperado");
-        marker.setLabelAnchor(RectangleAnchor.BOTTOM);
-        marker.setLabelTextAnchor(TextAnchor.BOTTOM_CENTER);
-        Font labelFont = new Font("Serif", Font.PLAIN, 12);
-        marker.setLabelFont(labelFont);
-       // target.setPaint(new Color(222, 222, 255, 128));
-        marker.setOutlinePaint(new Color(255,0,0));
-        XYPlot plot = (XYPlot) grafica.getPlot();
-        plot.addRangeMarker(marker, Layer.FOREGROUND);
-        
-     //   plot.setBackgroundPaint(Color.CYAN);
-       
-//         final BarRenderer renderer = (BarRenderer) plot.getRenderer();
-//          renderer.setSeriesPaint(0, Color.BLUE);
-        
-        panel = new ChartPanel(grafica);
+
     }
 
 
@@ -86,23 +73,154 @@ public class Graficador {
         this.panel = panel;
     }
     
+    
+    private HistogramDataset getDataH()
+    {
+        HistogramDataset hData = new HistogramDataset();
+         hData.setType(HistogramType.RELATIVE_FREQUENCY);
+        
+          double amplitud = cantNums / intervalos;
+       
+        double inicioIntervalo = 0;
+        double finalIntervalo = (inicioIntervalo + amplitud);
+        double marcaClase = 0;
+        
+        double [] vec = new double[frecuencias.length];
+        for (int i = 0; i < frecuencias.length; i++) {
+                vec[i] = frecuencias[i];
+            }
+        
+        hData.addSeries("H1", vec, (int)amplitud);
+        
+        return hData;
+    }
+            
+    
         private IntervalXYDataset createDataset() {
         final XYSeries series = new XYSeries("Observado");
+         
+        
+        // intervalos = 20
+        // cant numeros = 2000
+        // amplitud = 100
+        
+        
+       
+        
+       double amplitud = (1.0 / intervalos);
+        
+        double amplitudRounded = round(amplitud,2);
+       
+        double inicioIntervalo = 0;
+      //  double finalIntervalo = (round(inicioIntervalo,2) + amplitudRounded);
+        double finalIntervalo = inicioIntervalo + amplitud;
+        double marcaClase = 0;
+        
+        
+            for (int i = 0; i < frecuencias.length; i++) {
+                
+                System.out.println("FRECUENCIAS; "+frecuencias[i]);
+                //marcaClase = round((inicioIntervalo +  finalIntervalo)/2,2);
+                marcaClase = (inicioIntervalo +  finalIntervalo)/2;
+                System.out.println("MARCA DE CLASE: "+marcaClase);
+                
+               // series.addOrUpdate(inicioIntervalo   , frecuencias[i]);
+                series.addOrUpdate(marcaClase    , frecuencias[i]);
+               // series.addOrUpdate(finalIntervalo    ,frecuencias[i]);
+                
+                
+                
+                System.out.println("INICIO "+inicioIntervalo);
+                System.out.println("FIN "+finalIntervalo);
+                inicioIntervalo = finalIntervalo;
+                finalIntervalo = (inicioIntervalo + amplitud);
+            }
+        
+        
+        
         
         // primer valor: la marca de clase (punto medio de intervalos
         // segundo valor la frecuencia observada
-        series.add(1, 32);
-        series.add(2, 15);
-        series.add(3, 10);
-        series.add(4, 24);
-        series.add(5, 19);
+       // series.add(1, 32);
+     
         
 
         
         final XYSeriesCollection dataset = new XYSeriesCollection(series);
+        dataset.setIntervalWidth(amplitud);
 //        dataset.addSeries(series2);
         return dataset;
     }
+
+    public int getCantNums() {
+        return cantNums;
+    }
+
+    public void setCantNums(int cantNums) {
+        this.cantNums = cantNums;
+    }
+
+    public int getIntervalos() {
+        return intervalos;
+    }
+
+    public void setIntervalos(int intervalos) {
+        this.intervalos = intervalos;
+    }
+
+    public int[] getFrecuencias() {
+        return frecuencias;
+    }
+
+    public void setFrecuencias(int[] frecuencias) {
+        this.frecuencias = frecuencias;
+    }
+    
+    public void levantarFrame()
+    {
+        FrameGraficos f = new FrameGraficos(panel);
+        f.setSize(400,600);
+        f.setVisible(true);
+    }
+    
+    public void cargarDatos()
+    {
+         datosH = createDataset();
+         asignacion();
+    }
     
     
+    private void asignacion()
+    {
+        grafica = ChartFactory.createHistogram("Histograma de Frecuencias",
+        "Intervalos", "Frecuencias", datosH,
+        PlotOrientation.VERTICAL, true, true, false);
+        IntervalMarker marker = new IntervalMarker(cantNums/intervalos,cantNums/intervalos);
+        marker.setLabel("Esperado");
+        marker.setLabelAnchor(RectangleAnchor.BOTTOM);
+        marker.setLabelTextAnchor(TextAnchor.BOTTOM_CENTER);
+        Font labelFont = new Font("Serif", Font.PLAIN, 12);
+        marker.setLabelFont(labelFont);
+       // target.setPaint(new Color(222, 222, 255, 128));
+        marker.setOutlinePaint(new Color(255,0,0));
+        XYPlot plot = (XYPlot) grafica.getPlot();
+        plot.addRangeMarker(marker, Layer.FOREGROUND);
+        
+     //   plot.setBackgroundPaint(Color.CYAN);
+       
+//         final BarRenderer renderer = (BarRenderer) plot.getRenderer();
+//          renderer.setSeriesPaint(0, Color.BLUE);
+        
+        panel = new ChartPanel(grafica);
+    }
+    
+    
+    public static double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    long factor = (long) Math.pow(10, places);
+    value = value * factor;
+    long tmp = Math.round(value);
+    return (double) tmp / factor;
+}
 }
