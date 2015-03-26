@@ -27,6 +27,7 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
         modelo.addColumn("fo");
         modelo.addColumn("fe");
         modelo.addColumn("((fe-fo)^2)/2");
+        g = new Graficador();
         
     }
     TestChiCuadrado chi;
@@ -258,6 +259,9 @@ public static double round(double value, int places) {
     long tmp = Math.round(value);
     return (double) tmp / factor;
 }
+
+Graficador g;
+
     private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
         // TODO add your handling code here:
         
