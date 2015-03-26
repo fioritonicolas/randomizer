@@ -100,7 +100,7 @@ private Random r;
         });
 
         buttonGroup1.add(jRadioMulti);
-        jRadioMulti.setText("Metodo Multiplicativo");
+        jRadioMulti.setText("Metodo Congruencial Multiplicativo");
         jRadioMulti.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jRadioMultiStateChanged(evt);
@@ -108,13 +108,14 @@ private Random r;
         });
 
         buttonGroup1.add(jRadioMixto);
-        jRadioMixto.setText("Metodo Mixto");
+        jRadioMixto.setText("Metodo Congruencial Mixto");
 
         jLabel1.setText("Semilla");
 
         jLabel2.setText("Multiplicador");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Britannic Bold", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 204));
         jLabel3.setText("Generador de numeros aleatorios");
 
         jLabel4.setText("Cte Aditiva");
@@ -145,15 +146,10 @@ private Random r;
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(99, 99, 99)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(jButtonGenerar)
-                                .addGap(53, 53, 53)
-                                .addComponent(jButtonOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(142, 142, 142)
+                        .addComponent(jButtonGenerar)
+                        .addGap(76, 76, 76)
+                        .addComponent(jButtonOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,37 +157,44 @@ private Random r;
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(145, 145, 145))
+                .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(133, 133, 133))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextSemilla, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                                 .addComponent(jTextAditiva))
                             .addComponent(jRadioMulti))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextMultiplicador, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                .addComponent(jTextModulo))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jRadioMixto))
-                            .addComponent(jButtonGenerar1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(136, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(23, 23, 23)))
-                .addGap(102, 102, 102))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(jButtonGenerar1)
+                                .addGap(0, 57, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextMultiplicador, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jRadioMixto)
+                                    .addComponent(jTextModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(102, 102, 102))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addComponent(jLabel3)
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioMulti)
                     .addComponent(jRadioMixto))
@@ -199,7 +202,7 @@ private Random r;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextMultiplicador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,12 +214,12 @@ private Random r;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextAditiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGenerar)
                     .addComponent(jButtonOtro)
                     .addComponent(jButtonGenerar1))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -237,7 +240,7 @@ private Random r;
     private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
         // TODO add your handling code here:
        
-        
+        modelo.setRowCount(0);
         
        
         int semilla = Integer.parseInt(jTextSemilla.getText());
@@ -304,7 +307,8 @@ private Random r;
             
         {
             
-            Object unitario = (Object)r.getAleatorioMixtoUnitario();
+            double unitario2 = r.getAleatorioMixtoUnitario()*10000;
+            Object unitario = (Object)unitario2;
             fila[1] = unitario;
             fila[0] =  jTableResult.getRowCount()+1;
             modelo.addRow(fila);
@@ -314,7 +318,8 @@ private Random r;
         
         else if (jRadioMulti.isSelected())
         {
-            Object unitario = (Object)r.getAleatorioMultiUnitario();
+            double unitario2 = r.getAleatorioMultiUnitario()*10000;
+            Object unitario = (Object)unitario2;
             fila[1] = unitario;
             fila[0] =  jTableResult.getRowCount()+1;
             modelo.addRow(fila);
@@ -336,9 +341,13 @@ private Random r;
 
     private void jButtonGenerar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerar1ActionPerformed
         // TODO add your handling code here:
-        modelo =(DefaultTableModel) jTableResult.getModel();
+       
         modelo.setRowCount(0);
-        modelo.setColumnCount(0);
+        jTextSemilla.setText("");
+        jTextAditiva.setText("");
+        jTextMultiplicador.setText("");
+        jTextModulo.setText("");
+       
     }//GEN-LAST:event_jButtonGenerar1ActionPerformed
 
     /**
