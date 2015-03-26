@@ -255,8 +255,9 @@ private Random r;
             for (int i = 0; i < aux.length; i++) {
                 
                 fila[0] = i+1;
-                Object value = (Object) aux[i];
-                fila[1] = value;
+                double value =  aux[i]*10000;
+                Object value2 = (Object)value;
+                fila[1] = value2;
                 modelo.addRow(fila); 
             }
            
@@ -271,8 +272,9 @@ private Random r;
             for (int i = 0; i < aux.length; i++) {
                 
                 fila[0] = i+1;
-                Object value = (Object) aux[i];
-                fila[1] = value;
+                double value =  aux[i]*10000;
+                Object value2 = (Object)value;
+                fila[1] = value2;
                 modelo.addRow(fila); 
             }
            

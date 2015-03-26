@@ -5,7 +5,9 @@
  */
 package randomizer;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,9 +22,12 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
     public InterfazChiCuadrado() {
         initComponents();
         modelo.addColumn("Intervalos");
+        modelo.addColumn("Desde");
+        modelo.addColumn("Hasta");
         modelo.addColumn("fo");
         modelo.addColumn("fe");
-        g = new Graficador();
+        modelo.addColumn("((fe-fo)^2)/2");
+        
     }
     TestChiCuadrado chi;
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -72,21 +77,37 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
 
         jTableResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Intervalos", "fo", "fe"
+                "Intervalos", "Desde", "Hasta", "fo", "fe", "((fe-fo)^2)/2"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableResult);
+        if (jTableResult.getColumnModel().getColumnCount() > 0) {
+            jTableResult.getColumnModel().getColumn(0).setResizable(false);
+            jTableResult.getColumnModel().getColumn(1).setResizable(false);
+            jTableResult.getColumnModel().getColumn(2).setResizable(false);
+            jTableResult.getColumnModel().getColumn(3).setResizable(false);
+            jTableResult.getColumnModel().getColumn(4).setResizable(false);
+            jTableResult.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jLabel2.setText("cte Aditiva");
 
@@ -229,7 +250,14 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    Graficador g;
+public static double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    long factor = (long) Math.pow(10, places);
+    value = value * factor;
+    long tmp = Math.round(value);
+    return (double) tmp / factor;
+}
     private void jButtonGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarActionPerformed
         // TODO add your handling code here:
         
@@ -241,12 +269,22 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             g.setIntervalos(intervalos);
             
             chi = new TestChiCuadrado ();
-            Object[]fila = new Object[3];
+            Object[]fila = new Object[6];
+            
+            double amplitud = (double)(1.0/intervalos);
+            double amplitudNueva = round(amplitud,2);
+            double inicioIntervalo = 0;
+            double finalIntervalo = (round(inicioIntervalo,2) +  amplitudNueva);
+            float esperada;
+            float numerador;
+            double acum = 0;
             
             if(jRadioMath.isSelected())
-            {
             
-            ArrayList valores = new ArrayList();
+            {
+           
+            
+            
             int[] vec = new int[intervalos];
             
             vec = chi.intervalos(cantNums, intervalos);
@@ -254,15 +292,30 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             g.cargarDatos();
                 for (int i = 0; i < vec.length; i++) {
                     
-                  
+                    
+                   
+                    fila[1] = round(inicioIntervalo,2);
+                    fila[2] = round(finalIntervalo,2);
+         
+                    inicioIntervalo = round(finalIntervalo,2);
+                    finalIntervalo = (round(inicioIntervalo,2) +  amplitudNueva);
+                    
                     Object value = (Object) vec[i];
                     fila[0] = i+1;
-                    fila[1] = value;
-                    fila[2] = cantNums/intervalos;
+                    fila[3] = value;
+                    esperada = cantNums/intervalos;
+                    fila[4] = esperada;
+                    numerador = (esperada-vec[i]);
+                    fila[5] = (Math.pow(numerador,2))/2;
+                    acum = acum + (Math.pow(numerador,2))/2;
                     modelo.addRow(fila);
                     
+                    
                 }
-            
+            Object[]totales = new Object[6];
+            totales[0] = "TOTALES";
+            totales[5] = acum;
+            modelo.addRow(totales);
             jTableResult.setModel(modelo);
             }
             else if (jRadioMixto.isSelected())
@@ -273,7 +326,7 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             int multiplicador = Integer.parseInt(jTextMulti.getText());
             int cteAditiva = Integer.parseInt(jTextCteAdt.getText());
             int modulo = Integer.parseInt(jTextMod.getText()); 
-            ArrayList valores = new ArrayList();
+            
             int[] vec = new int[intervalos];
             
             vec = chi.intervalosCongruencialMixto(cantNums, intervalos, semilla, multiplicador, cteAditiva, modulo);
@@ -281,14 +334,27 @@ public class InterfazChiCuadrado extends javax.swing.JFrame {
             g.cargarDatos();
                 for (int i = 0; i < vec.length; i++) {
                     
+                    
+                    fila[1] = round(inicioIntervalo,2);
+                    fila[2] = round(finalIntervalo,2);
+                    inicioIntervalo = round(finalIntervalo,2);
+                    finalIntervalo = (round(inicioIntervalo,2) +  amplitudNueva);
+                    
                     Object value = (Object) vec[i];
                     fila[0] = i+1;
-                    fila[1] = value;
-                    fila[2] = cantNums/intervalos;
+                    fila[3] = value;
+                    esperada = cantNums/intervalos;
+                    fila[4] = esperada;
+                    numerador = (esperada-vec[i]);
+                    fila[5] = (Math.pow(numerador,2))/2;
+                    acum = acum + (Math.pow(numerador,2))/2;
                     modelo.addRow(fila);
                     
                 }
-                
+                Object[]totales = new Object[6];
+            totales[0] = "TOTALES";
+            totales[5] = acum;
+            modelo.addRow(totales);
                  jTableResult.setModel(modelo);
                 
             }
